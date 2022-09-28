@@ -9,7 +9,9 @@ var path = require("path"); //direccion
 
 //var conectado = require('./src/conexion/index');
 
-var tipdoc = require("./src/rutas/TipDocRutas"); //ruta
+var tipdoc = require("./src/rutas/TipDocRutas"); //ruta Documento
+var TipConct = require("./src/rutas/TipoContcRutas"); //ruta Tipo contacto 
+var TipCatalogo = require("./src/rutas/TipCatalogoRutas"); //ruta Tipo Catalogo 
 
 var app = express(); //recibe un constructor
 
@@ -58,6 +60,9 @@ app.use(function (req, res, next) {
 //============================================================
 
 app.use("/tipdoc", tipdoc()); //ruta para el servicio
+app.use("/TipConct", TipConct()); //ruta para el servicio
+app.use("/TipCatalogo", TipCatalogo()); //ruta para el servicio
+
 
 http.createServer(app).listen(app.get("port"), function () {
   console.log("Servidor Express escuchando por el puerto " + app.get("port"));
