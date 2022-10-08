@@ -42,6 +42,7 @@ module.exports = function () {
         Id_Produccion: req.body.Id_Produccion,
         Fecha_Produccion: req.body.Fecha_Produccion,
         Id_Empleado_Produccion: req.body. Id_Empleado_Produccion,
+        num_totalProduccion: req.body. num_totalProduccion,
         Id_Producto_Produccion: req.body. Id_Producto_Produccion,
         num_Defectuosos_Produccion: req.body. num_Defectuosos_Produccion,
         

@@ -7,18 +7,33 @@ var TipEncargadosModel = {};
 TipEncargadosModel.getTiposEncargados = function (callback) {
   if (connection) {
     var sql =
-      "SELECT id_Encargado,"+
-      " Nom1_Encargado," +
-      " Nom2_Encargado," +
-      " Apell1_Encargado,"+
-      " Apell2_Encargado,"+
-      " Sexo_Encargado," +
-      " FechaNacimiento_Encargado,"+
-      " Tip_Doc_Encargado,"+
-      " num_Doc_Encargado,"+
-      " Rol_Encargado "+
-      " FROM tb_encargados";
+      // "SELECT id_Encargado,"+
+      // " Nom1_Encargado," +
+      // " Nom2_Encargado," +
+      // " Apell1_Encargado,"+
+      // " Apell2_Encargado,"+
+      // " Sexo_Encargado," +
+      // " FechaNacimiento_Encargado,"+
+      // " Tip_Doc_Encargado,"+
+      // " num_Doc_Encargado,"+
+      // " Rol_Encargado "+
+      // " FROM tb_encargados";
       //" ORDER BY Tipo_Encargados";
+
+      `SELECT
+         Id_Encargado,
+         Nom1_Encargado,
+         Nom2_Encargado,
+         Apell1_Encargado,
+         Apell2_Encargado,
+         Sexo_Encargado,
+         FechaNacimiento_Encargado,
+         b.Nombre_Catalogo as Documento_encargado,
+         num_Doc_Encargado,
+         c.Nombre_Catalogo as Rol_Encargado 
+         FROM tb_encargados a
+         JOIN ct_catalogo b ON a.Tip_Doc_Encargado = b.id_catalogo
+         JOIN ct_catalogo c ON a.Rol_Encargado = c.id_catalogo;`
 
     connection.query(sql, function (error, rows) {
       if (error) {
@@ -35,20 +50,35 @@ TipEncargadosModel.getTiposEncargados = function (callback) {
 TipEncargadosModel.getTipEncargados = function (id, callback) {
   if (connection) {
     var sql =
-    "SELECT id_Encargado,"+
-    " Nom1_Encargado," +
-    " Nom2_Encargado," +
-    " Apell1_Encargado,"+
-    " Apell2_Encargado,"+
-    " Sexo_Encargado," +
-    " FechaNacimiento_Encargado,"+
-    " Tip_Doc_Encargado,"+
-    " num_Doc_Encargado,"+
-    " Rol_Encargado "+
-    " FROM tb_encargados"+
-    " WHERE id_Encargado = "+
-      connection.escape(id) +
-      ";";
+    // "SELECT id_Encargado,"+
+    // " Nom1_Encargado," +
+    // " Nom2_Encargado," +
+    // " Apell1_Encargado,"+
+    // " Apell2_Encargado,"+
+    // " Sexo_Encargado," +
+    // " FechaNacimiento_Encargado,"+
+    // " Tip_Doc_Encargado,"+
+    // " num_Doc_Encargado,"+
+    // " Rol_Encargado "+
+    // " FROM tb_encargados"+
+    // " WHERE id_Encargado = "+
+    //   connection.escape(id) +
+    //   ";";
+    `SELECT
+         Id_Encargado,
+         Nom1_Encargado,
+         Nom2_Encargado,
+         Apell1_Encargado,
+         Apell2_Encargado,
+         Sexo_Encargado,
+         FechaNacimiento_Encargado,
+         b.Nombre_Catalogo as Documento_encargado,
+         num_Doc_Encargado,
+         c.Nombre_Catalogo as Rol_Encargado 
+         FROM tb_encargados a
+         JOIN ct_catalogo b ON a.Tip_Doc_Encargado = b.id_catalogo
+         JOIN ct_catalogo c ON a.Rol_Encargado = c.id_catalogo
+         WHERE Id_Encargado = ${ connection.escape(id)};`
 
     //console.log("Estamos aca de 14 " + id);
 

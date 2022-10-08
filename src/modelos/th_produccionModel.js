@@ -18,12 +18,13 @@ TipProduccionModel.getTiposProduccion= function (callback) {
 
       `SELECT Id_Produccion,
       Fecha_Produccion, 
-      a.Nom1_Encargado as Id_Empleado_Produccion,
-      Id_Producto_Produccion,
+      b.Nom1_Encargado as Nombre_Empleado,
+      c.Nombre_Producto as Nombre_producto,
       num_totalProduccion,
       num_Defectuosos_Produccion
-      FROM th_produccion b
-      JOIN tb_encargados a ON b.Id_Empleado_Produccion = a.Id_Produccion;`
+      FROM th_produccion a
+      JOIN tb_encargados b ON a.Id_Empleado_Produccion = b.Id_Encargado
+      JOIN tb_productos c ON a.Id_Producto_Produccion = c.Id_Producto;`
 
     connection.query(sql, function (error, rows) {
       if (error) {
@@ -46,7 +47,7 @@ TipProduccionModel.getTipProduccion = function (id, callback) {
       " Id_Producto_Produccion,"+
       " num_totalProduccion,"+
       " num_Defectuosos_Produccion"+
-      " FROM th_produccion";
+      " FROM th_produccion"+
       " WHERE Id_Produccion = "+
       connection.escape(id) +
       ";";

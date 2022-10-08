@@ -10,17 +10,11 @@ module.exports = function () {
       });
     });
 
-    //buscamos un solo id
-    router.get("/:id", function (req, res) {
-      var id = req.params.id;
-    
-<<<<<<< Updated upstream
+    //buscamos un solo id  
   router.get("/:id", function (req, res) {
     var id = req.params.id;
-  
-    //Solo actualizamos si la id es un numero
     if (!isNaN(id)) {
-      TipConctModel.getTiposConcts(id, function (error, data) {
+      TipConctModel.getTipConct(id, function (error, data) {
         //Si el tipo de documento existe lo mostramos
         //en formato json
         if (typeof data !== "undefined" && data.length > 0) {
@@ -38,30 +32,9 @@ module.exports = function () {
     }
   });
  //------------------------------------
-=======
-      //Solo actualizamos si la id es un numero
-      if (!isNaN(id)) {
-        TipConctModel.getTipConct(id, function (error, data) {
-          //Si el tipo de documento existe lo mostramos
-          //en formato json
-          if (typeof data !== "undefined" && data.length > 0) {
-            res.status(200).json(data);
-          }
-          //En otro caso mostramos una respuesta conforme
-          //no existe
-          else {
-            res.json(404, { msg: "Resgistro no Existe" });
-          }
-        });
-      } //Si hay algun error
-      else {
-        res.status(500).json({ msg: "error" });
-      }
-    });
->>>>>>> Stashed changes
- //muestra y captura los datos del metodo CRUL crear, usando el verbo POST
+//  muestra y captura los datos del metodo CRUL crear, usando el verbo POST
   
-    //muestra y captura los datos del metodo CRUL crear, usando el verbo POST
+//     muestra y captura los datos del metodo CRUL crear, usando el verbo POST
   
   router.post("/", function (req, res) {
     var TipContactoData = {
@@ -104,5 +77,4 @@ router.put("/", function(req, res)
 });
   return router;
   
-  }
- 
+}

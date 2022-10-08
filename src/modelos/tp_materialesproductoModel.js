@@ -7,12 +7,19 @@ var TipMaterialesProductoModel= {};
 TipMaterialesProductoModel.getTipmaterialesproductos = function (callback) {
   if (connection) {
     var sql =
-      "SELECT Id_MaterialProducto,"+
-      " IProducto_MaterialProducto," +
-      " IMaterial_MaterialProducto," +
-      " cantidad_MaterialProducto"+
-      " FROM tp_materiales_productos";
+      // "SELECT Id_MaterialProducto,"+
+      // " IProducto_MaterialProducto," +
+      // " IMaterial_MaterialProducto," +
+      // " cantidad_MaterialProducto"+
+      // " FROM tp_materiales_productos";
       //" ORDER BY Tipo_materialesproductos";
+        `SELECT Id_MaterialProducto,
+         b.Nombre_Material as Nombre_Material,
+         c.Nombre_Producto as Nombre_Producto,
+         cantidad_MaterialProducto
+         FROM tp_materiales_productos a
+         JOIN tb_materiales b ON a.IMaterial_MaterialProducto = b.Id_Material
+         JOIN tb_productos c ON a.IProducto_MaterialProducto = c.Id_Producto;`
 
     connection.query(sql, function (error, rows) {
       if (error) {
@@ -30,15 +37,22 @@ TipMaterialesProductoModel.getTipmaterialesproductos = function (callback) {
 TipMaterialesProductoModel.getTipoMaterialesProducto = function (id, callback) {
   if (connection) {
     var sql =
-    "SELECT Id_MaterialProducto,"+
-      " IProducto_MaterialProducto," +
-      " IMaterial_MaterialProducto," +
-      " cantidad_MaterialProducto"+
-      " FROM tp_materiales_productos"+
-      " WHERE Id_MaterialProducto = "+
-      connection.escape(id) +
-      ";";
-
+    // "SELECT Id_MaterialProducto,"+
+    //   " IProducto_MaterialProducto," +
+    //   " IMaterial_MaterialProducto," +
+    //   " cantidad_MaterialProducto"+
+    //   " FROM tp_materiales_productos"+
+    //   " WHERE Id_MaterialProducto = "+
+    //   connection.escape(id) +
+    //   ";";
+    `SELECT Id_MaterialProducto,
+    b.Nombre_Material as Nombre_Material,
+    c.Nombre_Producto as Nombre_Producto,
+    cantidad_MaterialProducto
+    FROM tp_materiales_productos a
+    JOIN tb_materiales b ON a.IMaterial_MaterialProducto = b.Id_Material
+    JOIN tb_productos c ON a.IProducto_MaterialProducto = c.Id_Producto
+    WHERE Id_MaterialProducto = ${ connection.escape(id)};`
     //console.log("Estamos aca de 14 " + id);
 
     connection.query(sql, function (error, rows) {
