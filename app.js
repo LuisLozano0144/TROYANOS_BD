@@ -12,6 +12,11 @@ var path = require("path"); //direccion
 var tipdoc = require("./src/rutas/TipDocRutas"); //ruta Documento
 var TipConct = require("./src/rutas/TipoContcRutas"); //ruta Tipo contacto 
 var TipCatalogo = require("./src/rutas/TipCatalogoRutas"); //ruta Tipo Catalogo 
+var TipEncargados = require("./src/rutas/TipEncargadosRutas");//ruta Tipo Encargado
+var TipProduccion = require("./src/rutas/TipProduccionRutas");//ruta Tipo Produccion
+var TipProducto = require("./src/rutas/TipProducRutas");//ruta Tipo Producto
+var Tipmaterialesproductos = require("./src/rutas/TipMaterialesProductoRuta");//ruta Tipo materialesproducto
+
 
 var app = express(); //recibe un constructor
 
@@ -62,6 +67,11 @@ app.use(function (req, res, next) {
 app.use("/tipdoc", tipdoc()); //ruta para el servicio
 app.use("/TipConct", TipConct()); //ruta para el servicio
 app.use("/TipCatalogo", TipCatalogo()); //ruta para el servicio
+app.use("/TipEncargados",TipEncargados());//ruta para el servicio
+app.use("/TipProduccion",TipProduccion());//ruta para el servicio
+app.use("/TipProducto",TipProducto());//ruta para el servicio
+app.use("/Tipmaterialesproductos",Tipmaterialesproductos());//ruta para el servicio
+
 
 
 http.createServer(app).listen(app.get("port"), function () {
