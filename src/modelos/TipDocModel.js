@@ -25,8 +25,6 @@ TipDocModel.getTiposDocs = function (callback) {
   }
 };
 
-module.exports = TipDocModel;
-
 //--------------------------------------------------
 //Obtenemos un tipo doc para su id
 
@@ -89,3 +87,4 @@ TipDocModel.updateTipDoc = function (TipDocData, callback) {
     });
   }
 };
+module.exports = TipDocModel;

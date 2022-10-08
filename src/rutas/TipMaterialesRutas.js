@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-var TipCatalogoModel = require("../modelos/ct_catalogoModel");
+var TipMaterialModel = require("../modelos/TipMaterialesModel");
 
 module.exports = function () {
     router.get("/", function (req, res) {
-      TipCatalogoModel.getTiposCatalogo(function (error, data) {
+        TipMaterialModel.getTiposMateriales(function (error, data) {
         res.status(200).json(data);
       });
     });
@@ -15,7 +15,7 @@ module.exports = function () {
     
       //Solo actualizamos si la id es un numero
       if (!isNaN(id)) {
-        TipCatalogoModel.getTipCatalogo(id, function (error, data) {
+        TipMaterialModel.getTipMaterial(id, function (error, data) {
           //Si el tipo de documento existe lo mostramos
           //en formato json
           if (typeof data !== "undefined" && data.length > 0) {
@@ -32,17 +32,20 @@ module.exports = function () {
         res.status(500).json({ msg: "error" });
       }
     });
-   //------------------------------------
+     //------------------------------------
   //muestra y captura los datos del metodo CRUL crear, usando el verbo POST
   
   router.post("/", function (req, res) {
-    var TipoCatalogoData = {
-      Id_Catalogo: req.body.Id_Catalogo,
-      Nombre_Catalogo: req.body.Nombre_Catalogo,
-      Tipo_Catalogo: req.body.Tipo_Catalogo
+    var TipoMaterialData = {
+      Id_Material: req.body.Id_Material,
+      Nombre_Material: req.body.Nombre_Material,
+      Proveedor_Material: req.body.Proveedor_Material,
+      tel_Proveedor_Material: req.body.tel_Proveedor_Material,
+      Uso_Material: req.body.Uso_Material,
+      Tipo_Material: req.body.Tipo_Material
     };
      //usamos funcion para insertar
-     TipCatalogoModel.insertTipoCatalogo(TipoCatalogoData  ,function (error, data) {
+     TipMaterialModel.insertTipoMaterial(TipoMaterialData  ,function (error, data) {
     
       // se muestran los mensajes correspondientes
       if (data) {
@@ -53,18 +56,20 @@ module.exports = function () {
       }
     });
   });
-
-  //actualizar documento 
+//actualizar material 
 
 router.put("/", function(req, res)
 {
-  var TipoCatalogoData={
-    Id_Catalogo: req.body.Id_Catalogo,
-    Tipo_Catalogo: req.body.Tipo_Catalogo,
-    Nombre_Catalogo: req.body.Nombre_Catalogo,
+  var TipoMaterialData={
+    Id_Material: req.body.Id_Material,
+    Nombre_Material: req.body.Nombre_Material,
+    Proveedor_Material: req.body.Proveedor_Material,  
+    tel_Proveedor_Material: req.body.tel_Proveedor_Material,
+    Uso_Material: req.body.Uso_Material,
+    Tipo_Material: req.body.Tipo_Material,
   };
 
-  TipCatalogoModel.updateTipCatalogo(TipoCatalogoData, function(error, data) {
+  TipMaterialModel.updateTipMaterial(TipoMaterialData, function(error, data) {
     if(data && data.msg) {
       res.status(200).json(data);
      } else{
@@ -73,8 +78,5 @@ router.put("/", function(req, res)
   });
   
 });
-
-  return router;
-  
-  }
- 
+    return router;
+}

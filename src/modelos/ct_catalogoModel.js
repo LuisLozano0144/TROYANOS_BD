@@ -67,11 +67,11 @@ TipCatalogoModel.insertTipoCatalogo = function(TipoCatalogoData, callback){
 TipCatalogoModel.updateTipCatalogo = function (TipoCatalogoData, callback) {
   if (connection) {
     var sql = "UPDATE ct_catalogo SET Nombre_Catalogo = " 
-      + connection.escape(TipoCatalogoData.Nombre_catalogo)
-      + ", tipo_catalogo = " +
-      connection.escape(TipoCatalogoData.Tipo_contacto)
-      + " WHERE id_catalogo = " +
-      connection.escape(TipoCatalogoData.id_Catalogo) + ";";
+      + connection.escape(TipoCatalogoData.Nombre_Catalogo)
+      + ", Tipo_Catalogo = " +
+      connection.escape(TipoCatalogoData.Tipo_Catalogo)
+      + " WHERE Id_Catalogo = " +
+      connection.escape(TipoCatalogoData.Id_Catalogo) + ";";
 
     connection.query(sql, function (error, result) {
       if (error) {
