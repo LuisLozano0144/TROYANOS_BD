@@ -67,11 +67,11 @@ TipCatalogoModel.insertTipoCatalogo = function(TipoCatalogoData, callback){
 TipCatalogoModel.updateTipCatalogo = function (TipoCatalogoData, callback) {
   if (connection) {
     var sql = "UPDATE ct_catalogo SET Nombre_Catalogo = " 
-      + connection.escape(TipoCatalogoData.Nombre_catalogo)
-      + ", tipo_catalogo = " +
-      connection.escape(TipoCatalogoData.Tipo_contacto)
-      + " WHERE id_catalogo = " +
-      connection.escape(TipoCatalogoData.id_Catalogo) + ";";
+      + connection.escape(TipoCatalogoData.Nombre_Catalogo)
+      + ", Tipo_Catalogo = " +
+      connection.escape(TipoCatalogoData.Tipo_Catalogo)
+      + " WHERE Id_Catalogo = " +
+      connection.escape(TipoCatalogoData.Id_Catalogo) + ";";
 
     connection.query(sql, function (error, result) {
       if (error) {
@@ -80,6 +80,25 @@ TipCatalogoModel.updateTipCatalogo = function (TipoCatalogoData, callback) {
         callback(null, { "msg": "Registro Actualizado" });
       }
     });
+  }
+};
+
+//consultar catalogos 
+
+TipCatalogoModel.getCatalogoSolo =function (tipo, callback){
+  if (connection) {
+    var sql = `SELECT Id_Catalogo,
+    Nombre_Catalogo,
+    FROM ct_catalogo
+    WHERE Tipo_Catalogo=${connection.escape(tipo)};`
+
+    connection.query(sql, function (error, rows) {
+      if(error) {
+        throw error;
+      } else {
+        callback(rows);
+      }
+    })
   }
 };
 
