@@ -67,7 +67,7 @@ router.put("/", function(req, res)
     Peso_Producto: req.body.Peso_Producto,
     Dimensiones_Producto: req.body.Dimensiones_Producto,
     Tipo_producto: req.body.Tipo_producto,
-    Estilo_Producto: req.body.Estilo_Producto
+    Estilo_Producto: req.body.Estilo_Producto,
   };
 
   TipProductosModel.updateTipProducto(TipoProductoData, function(error, data) {

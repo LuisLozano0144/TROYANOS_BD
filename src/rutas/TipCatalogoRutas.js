@@ -3,7 +3,7 @@ const router = express.Router();
 
 var TipCatalogoModel = require("../modelos/ct_catalogoModel");
 
-module.exports = function () {
+  module.exports = function () {
     router.get("/", function (req, res) {
       TipCatalogoModel.getTiposCatalogo(function (error, data) {
         res.status(200).json(data);
@@ -74,6 +74,16 @@ router.put("/", function(req, res)
   
 });
 
+
+// //catalogo rutas
+
+module.exports = function () {
+  router.get("/", function (req, res) {
+    TipCatalogoModel.getCatalogoSolo(function (error, data) {
+      res.status(200).json(data);
+    });
+  });
+}
   return router;
   
   }

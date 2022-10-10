@@ -41,16 +41,16 @@ TipProduccionModel.getTiposProduccion= function (callback) {
 TipProduccionModel.getTipProduccion = function (id, callback) {
   if (connection) {
     var sql =
-    "SELECT Id_Produccion,"+
-      " Fecha_Produccion," +
-      " Id_Empleado_Produccion," +
-      " Id_Producto_Produccion,"+
-      " num_totalProduccion,"+
-      " num_Defectuosos_Produccion"+
-      " FROM th_produccion"+
-      " WHERE Id_Produccion = "+
-      connection.escape(id) +
-      ";";
+    `SELECT Id_Produccion,
+      Fecha_Produccion, 
+      b.Nom1_Encargado as Nombre_Empleado,
+      c.Nombre_Producto as Nombre_producto,
+      num_totalProduccion,
+      num_Defectuosos_Produccion
+      FROM th_produccion a
+      JOIN tb_encargados b ON a.Id_Empleado_Produccion = b.Id_Encargado
+      JOIN tb_productos c ON a.Id_Producto_Produccion = c.Id_Producto
+      WHERE Id_Produccion =${connection.escape(id)};`
 
     //console.log("Estamos aca de 14 " + id);
 
