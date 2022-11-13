@@ -38,7 +38,6 @@ module.exports = function () {
   
   router.post("/", function (req, res) {
     var TipContactoData = {
-      Id_Contactos: req.body.Id_Contactos,
       Dato_Contacto: req.body.Dato_Contacto,
       Encargado_Contacto: req.body.Encargado_Contacto,
       Tipo_Contacto: req.body.Tipo_Contacto

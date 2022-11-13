@@ -38,8 +38,6 @@ module.exports = function () {
   
   router.post("/", function (req, res) {
     var TipomaterialesproductosData={
-
-        Id_MaterialProducto: req.body.Id_MaterialProducto,
         IProducto_MaterialProducto: req.body.IProducto_MaterialProducto,
         IMaterial_MaterialProducto: req.body.IMaterial_MaterialProducto,
         cantidad_MaterialProducto: req.body.cantidad_MaterialProducto,

@@ -35,7 +35,6 @@ module.exports = function () {
   
   router.post("/", function (req, res) {
     var TipoProductoData = {
-      Id_Producto: req.body.Id_Producto,
       Nombre_Producto: req.body.Nombre_Producto,
       Peso_Producto: req.body.Peso_Producto,
       Dimensiones_Producto: req.body.Dimensiones_Producto,

@@ -37,7 +37,6 @@ module.exports = function () {
   
   router.post("/", function (req, res) {
     var TipoMaterialData = {
-      Id_Material: req.body.Id_Material,
       Nombre_Material: req.body.Nombre_Material,
       Proveedor_Material: req.body.Proveedor_Material,
       tel_Proveedor_Material: req.body.tel_Proveedor_Material,

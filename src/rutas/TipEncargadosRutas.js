@@ -38,8 +38,6 @@ module.exports = function () {
   
   router.post("/", function (req, res) {
     var TipoEncargadosData={
-      
-        id_Encargado: req.body.id_Encargado,
         Nom1_Encargado: req.body.Nom1_Encargado,
         Nom2_Encargado: req.body. Nom2_Encargado,
         Apell1_Encargado: req.body. Apell1_Encargado,

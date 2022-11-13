@@ -38,7 +38,6 @@ module.exports = function () {
   
   router.post("/", function (req, res) {
     var TipDocData = {
-      id_tip_doc: null,
       tipo_documento: req.body.tipo_documento,
       iniciales_tip_doc: req.body.iniciales_tip_doc
     };

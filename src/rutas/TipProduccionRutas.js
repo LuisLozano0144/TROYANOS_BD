@@ -38,8 +38,6 @@ module.exports = function () {
   
   router.post("/", function (req, res) {
     var TipoProduccionData={
-
-        Id_Produccion: req.body.Id_Produccion,
         Fecha_Produccion: req.body.Fecha_Produccion,
         Id_Empleado_Produccion: req.body. Id_Empleado_Produccion,
         num_totalProduccion: req.body. num_totalProduccion,
