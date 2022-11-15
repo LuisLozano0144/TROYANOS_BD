@@ -5,18 +5,20 @@ var TipMaterialModel = {};
 
 TipMaterialModel.getTiposMateriales = function (callback) {
   if (connection) {
-    var sql =
-    `SELECT
+    var sql = `SELECT
     id_material,
     nombre_material,
     proveedor_material,
     tel_proveedor_material,
-    a.Nombre_Catalogo as Tipo_Material,
-    c.Tipo_Catalogo as Uso_Material
+    e.Nombre_Catalogo as Tipo_Material,
+    t.Nombre_Catalogo as Uso_Material
+ 
     FROM
-         tb_materiales b
-    JOIN ct_catalogo a ON b.uso_material = a.id_catalogo
-    JOIN ct_catalogo c ON b.Tipo_Material = c.id_catalogo;`
+         tb_materiales a
+    JOIN ct_catalogo e ON a.Tipo_Material = e.Id_Catalogo
+    JOIN ct_catalogo t ON t.Id_Catalogo = a.Uso_Material;`;
+
+    // " SELECT Id_Producto, Nombre_Producto, Peso_Producto, Dimensiones_Producto ,e.Nombre_Catalogo as Nombre_Catalogo, t.Nombre_Catalogo as Tipo_Catalogo FROM tb_productos a JOIN ct_catalogo e ON a.Tipo_Producto = e.Id_Catalogo JOIN ct_catalogo t ON t.Id_Catalogo = a.Estilo_Producto ";
 
     connection.query(sql, function (error, rows) {
       if (error) {
@@ -35,8 +37,7 @@ TipMaterialModel.getTiposMateriales = function (callback) {
 
 TipMaterialModel.getTipMaterial = function (id, callback) {
   if (connection) {
-    var sql =
-    `SELECT
+    var sql = `SELECT
     id_material,
     nombre_material,
     proveedor_material,
@@ -47,7 +48,7 @@ TipMaterialModel.getTipMaterial = function (id, callback) {
          tb_materiales b
     JOIN ct_catalogo a ON b.uso_material = a.id_catalogo
     JOIN ct_catalogo c ON b.Tipo_Material = c.id_catalogo
-    WHERE id_material = ${ connection.escape(id)}`
+    WHERE id_material = ${connection.escape(id)}`;
 
     //console.log("Estamos aca de 14 " + id);
 
@@ -58,20 +59,19 @@ TipMaterialModel.getTipMaterial = function (id, callback) {
       } else {
         callback(null, rows);
       }
-    })
+    });
   }
 };
-//insertar datos 
-TipMaterialModel.insertTipoMaterial = function(TipoMaterialData, callback){
-  if(connection){
+//insertar datos
+TipMaterialModel.insertTipoMaterial = function (TipoMaterialData, callback) {
+  if (connection) {
     var sql = " INSERT INTO tb_materiales SET ?";
-    
-    connection.query(sql, TipoMaterialData, function (error, result){
-      if(error){
-        throw error;
 
-      }else{
-        callback(null, {"msg": "Registro insertado"});
+    connection.query(sql, TipoMaterialData, function (error, result) {
+      if (error) {
+        throw error;
+      } else {
+        callback(null, { msg: "Registro insertado" });
       }
     });
   }
@@ -79,24 +79,26 @@ TipMaterialModel.insertTipoMaterial = function(TipoMaterialData, callback){
 //Actualizar tipo material
 TipMaterialModel.updateTipMaterial = function (TipoMaterialData, callback) {
   if (connection) {
-    var sql = "UPDATE tb_materiales SET Nombre_Material = " 
-      + connection.escape(TipoMaterialData.Nombre_Material)
-      + ", Proveedor_Material = " +
-      connection.escape(TipoMaterialData.Proveedor_Material)
-      + ", tel_Proveedor_Material = " +
-      + connection.escape(TipoMaterialData.tel_Proveedor_Material)
-      + ", Uso_Material = " +
-      + connection.escape(TipoMaterialData.Uso_Material)
-      + ", Tipo_Material = " +
-      + connection.escape(TipoMaterialData.Tipo_Material)
-      + " WHERE Id_Material = " +
-      connection.escape(TipoMaterialData.Id_Material) + ";";
+    var sql =
+      "UPDATE tb_materiales SET Nombre_Material = " +
+      connection.escape(TipoMaterialData.Nombre_Material) +
+      ", Proveedor_Material = " +
+      connection.escape(TipoMaterialData.Proveedor_Material) +
+      ", tel_Proveedor_Material = " +
+      +connection.escape(TipoMaterialData.tel_Proveedor_Material) +
+      ", Uso_Material = " +
+      +connection.escape(TipoMaterialData.Uso_Material) +
+      ", Tipo_Material = " +
+      +connection.escape(TipoMaterialData.Tipo_Material) +
+      " WHERE Id_Material = " +
+      connection.escape(TipoMaterialData.Id_Material) +
+      ";";
 
     connection.query(sql, function (error, result) {
       if (error) {
         throw error;
       } else {
-        callback(null, { "msg": "Registro Actualizado" });
+        callback(null, { msg: "Registro Actualizado" });
       }
     });
   }
